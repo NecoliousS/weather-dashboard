@@ -11,7 +11,7 @@ async function getWeather() {
     }
 
     try {
-       const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=imperial`);
+        const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
         
         if (!response.ok) {
             throw new Error('City not found');
