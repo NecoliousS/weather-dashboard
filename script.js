@@ -1,4 +1,4 @@
-const apiKey = '0043fe80eb91494e99c73a5061385012';
+const apiKey = '0043fe80eb91494e99c73a5061385012'; // REPLACE THIS
 const apiUrl = 'https://api.openweathermap.org/data/2.5/weather';
 
 async function getWeather() {
@@ -11,7 +11,7 @@ async function getWeather() {
     }
 
     try {
-        const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=metric`);
+        const response = await fetch(`${apiUrl}?q=${city}&appid=${apiKey}&units=imperial`);
         
         if (!response.ok) {
             throw new Error('City not found');
@@ -36,10 +36,10 @@ function displayWeather(data) {
     const weatherIcon = document.getElementById('weather-icon');
 
     cityName.textContent = `${data.name}, ${data.sys.country}`;
-    temperature.textContent = `${Math.round(data.main.temp)}°C`;
+    temperature.textContent = `${Math.round(data.main.temp)}°F`;
     description.textContent = data.weather[0].description;
     humidity.textContent = `${data.main.humidity}%`;
-    windSpeed.textContent = `${data.wind.speed} m/s`;
+    windSpeed.textContent = `${data.wind.speed} mph`;
     
     const iconCode = data.weather[0].icon;
     weatherIcon.src = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
@@ -63,7 +63,6 @@ function hideWeather() {
     weatherCard.classList.add('hidden');
 }
 
-// Allow Enter key to search
 document.getElementById('city-input').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
         getWeather();
